@@ -5,10 +5,6 @@ cd /tmp
 wget -q https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb
 sudo dpkg -i packages-microsoft-prod.deb
 
-curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
-install -o root -g root -m 644 packages.microsoft.gpg /usr/share/keyrings/
-sh -c 'echo "deb [arch=amd64 signed-by=/usr/share/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
-
 # Nextcloud ppa
 sudo add-apt-repository ppa:nextcloud-devs/client
 sudo apt-get update
@@ -19,7 +15,7 @@ sudo add-apt-repository universe
 sudo apt update
 
 # install pkgs
-pkg_list=( "git" "fonts-powerline" "pip" "tmux" "speedtest-cli" "htop"
+pkg_list=( "git" "fonts-powerline" "tmux" "speedtest-cli" "htop"
 	"remmina" "remmina-plugin-rdp" "remmina-plugin-secret" "remmina-plugin-spice"
 	"nmap" "screen" "powershell" "vim" "tilix" "chromium-browser" "curl" "neofetch"
 	"wireshark" "virtualbox" "virtualbox-guest-utils" "virtualbox-guest-dkms"
