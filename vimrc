@@ -3,6 +3,7 @@ filetype off
 
 set number
 set tabstop=4
+set complete+=kspell
 filetype plugin indent on    " required
 :color murphy 
 syntax on
@@ -15,5 +16,6 @@ call plug#begin()
 Plug 'vimwiki/vimwiki'
 call plug#end()
 " File templates
-au BufNewFile postmortem-*.md 0r ~/Documents/postmortem-templates/templates/postmortem-template-srebook.md
+au BufNewFile postmortem-*.md 0r ~/dotfiles/templates/postmortem-template.md
+au BufNewFile sow-*.md 0r ~/dotfiles/templates/sow-template.md
 
