@@ -15,12 +15,12 @@ sudo add-apt-repository universe
 sudo apt update
 
 # install pkgs
-pkg_list=( "git" "fonts-powerline" "tmux" "speedtest-cli" "htop"
+pkg_list=( "git" "fonts-powerline" "tmux" "speedtest-cli" "htop" "python-pip"
 	"remmina" "remmina-plugin-rdp" "remmina-plugin-secret" "remmina-plugin-spice"
 	"nmap" "screen" "powershell" "vim" "tilix" "chromium-browser" "curl" "neofetch"
 	"wireshark" "virtualbox" "virtualbox-guest-utils" "virtualbox-guest-dkms"
 	"virtualbox-guest-x11" "vagrant-sshfs" "vagrant-lxc" "vagrant-digitalocean"
-	"powerline" "vim-airline" "apt-transport-https" )
+	"powerline" "vim-airline" "apt-transport-https" "lolcat" )
 
 apt install -y "${pkg_list[@]}"
 
