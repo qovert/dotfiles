@@ -1,4 +1,5 @@
 #!/bin/bash
+# Replacing this with Ansible
 
 # Install nerd font 
 #cd /tmp
