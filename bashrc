@@ -91,6 +91,7 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
+alias shdate='date +"%m-%d-%y"'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -103,6 +104,10 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
+fi
+
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+        source /etc/profile.d/vte.sh
 fi
 
 # enable programmable completion features (you don't need to enable
@@ -120,4 +125,4 @@ fi
 powerline-daemon -q
 POWERLINE_BASH_CONTINUATION=1
 POWERLINE_BASH_SELECT=1
-. /usr/share/powerline/bindings/bash/powerline.sh
+. /usr/share/powerline/bash/powerline.sh
