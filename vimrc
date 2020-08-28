@@ -23,5 +23,5 @@ let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown'
 call plug#end()
 " File templates
 au BufNewFile postmortem-*.md 0r ~/dotfiles/templates/postmortem-template.md
-au BufNewFile sow-*.md 0r ~/dotfiles/templates/sow-template.md
+au BufNewFile project-*.md 0r ~/dotfiles/templates/project-template.md
 

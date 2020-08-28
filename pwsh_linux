@@ -5,3 +5,13 @@ if (Test-Path $histpath) { Import-Clixml $histpath |Add-History }
 Import-Module posh-git
 Import-Module oh-my-posh
 Set-Theme Paradox
+
+#$Global:ThemeSettings.CurrentHostname = 'titan'
+
+# Functions
+
+function Get-MyRGs () { 
+	Get-AzResourceGroup | 
+	select ResourceGroupName,Location | 
+	sort-object ResourceGroupName
+}

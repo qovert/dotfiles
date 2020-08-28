@@ -1,0 +1,37 @@
+---
+- name: Upgrade all
+  dnf:
+    name: "*"
+    state: latest
+
+- name: Install group pkgs
+  dnf: name={{ item }} state=installed
+  with_items:
+    - "@development tools"
+    - "@virtualization"
+
+- name: Install pkgs
+  dnf: name={{ item }} state=installed
+  with_items:
+    - git
+    - powerline
+    - powerline-fonts
+    - tmux
+    - screen
+    - htop
+    - python3-pip
+    - remmina
+    - remmina-plugins-rdp
+    - remmina-plugins-spice
+    - remmina-plugins-secret
+    - nextcloud-client
+    - gnome-shell-extension-user-theme
+    - nmap
+    - tilix
+    - vim
+    - vim-airline
+    - curl
+    - neofetch
+    - wireshark
+    - lolcat
+    - terminus-fonts

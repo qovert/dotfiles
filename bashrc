@@ -92,6 +92,7 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias shdate='date +"%m-%d-%y"'
+alias ls='ls --color=auto'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -126,3 +127,7 @@ powerline-daemon -q
 POWERLINE_BASH_CONTINUATION=1
 POWERLINE_BASH_SELECT=1
 . /usr/share/powerline/bash/powerline.sh
+
+[[ -s "/etc/profile.d/grc.sh" ]] && source /etc/profile.d/grc.sh
+
+eval "$(starship init bash)"

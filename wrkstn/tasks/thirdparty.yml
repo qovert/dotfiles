@@ -1,0 +1,10 @@
+---
+- name: Install Google Chrome
+  dnf:
+    name: google-chrome-stable
+    state: present
+
+- name: Microsoft Tools
+  dnf:
+    name: ['powershell','azure-cli','code']
+    state: present

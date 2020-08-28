@@ -1,0 +1,35 @@
+---
+- name: Google Chrome Repo
+  dnf: 
+    name: 'https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm'
+    state: present
+
+- name: Microsoft Powershell Repo
+  yum_repository:
+    name: microsoft-prod
+    description: Microsoft Repo
+    gpgkey: "https://packages.microsoft.com/keys/microsoft.asc"
+    baseurl: "https://packages.microsoft.com/rhel/7/prod/"
+    enabled: 1
+
+- name: Azure CLI Repo
+  yum_repository:
+    name: microsoft-azurecli
+    description: AzureCLI repo
+    gpgkey: "https://packages.microsoft.com/keys/microsoft.asc"
+    baseurl: "https://packages.microsoft.com/yumrepos/azure-cli"
+    enabled: 1
+
+- name: VS Code Repo
+  yum_repository:
+    name: microsoft-vscode
+    description: Visual Studio Code Repo
+    gpgkey: "https://packages.microsoft.com/keys/microsoft.asc"
+    baseurl: "https://packages.microsoft.com/yumrepos/vscode"
+    enabled: 1
+
+- name: Docker Repo
+  get_url:
+    url: https://download.docker.com/linux/fedora/docker-ce.repo
+    dest: /etc/yum.repos.d/docker-ce.repo
+  become: yes
