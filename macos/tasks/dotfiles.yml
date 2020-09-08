@@ -1,0 +1,9 @@
+- name: dotfiles links
+  file:
+    src: '{{ ansible_env.PWD }}/files/{{ item }}'
+    path: '~/.{{ item }}'
+    state: link
+  loop:
+  - gitconfig
+  - tmux.conf
+  - vimrc

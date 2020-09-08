@@ -1,0 +1,18 @@
+homebrew_taps: []
+
+homebrew_package_removals: []
+
+homebrew_packages:
+- nodejs
+- ncdu
+- python
+- wget
+
+homebrew_cask_packages:
+- firefox
+- docker
+- steam
+- vagrant
+- vlc
+- virtualbox
+- visual-studio-code

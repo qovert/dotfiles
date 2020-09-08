@@ -1,0 +1,15 @@
+---
+- name: Workstation Setup
+  hosts: workstation
+  tasks:
+  - include_tasks: tasks/dotfiles.yml 
+  - include_tasks: tasks/installs.yml
+  - include_tasks: tasks/main.yml
+  - debug:
+      msg: Correct current dir?
+    failed_when: not ansible_env.PWD.endswith('/macos')
+
+  vars_files:
+  - vars/main.yml
+
+
