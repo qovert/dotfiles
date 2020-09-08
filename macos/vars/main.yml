@@ -18,3 +18,10 @@ homebrew_cask_packages:
 - virtualbox
 - visual-studio-code
 - powershell
+
+powershell_modules:
+- Posh-Git
+- NameIT
+- oh-my-posh
+- Az
+- PSWriteHTML

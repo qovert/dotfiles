@@ -12,14 +12,6 @@
   tags:
   - brew
 
-- name: Uninstall old homebrew junk
-  homebrew: 
-    name: '{{ item }}'
-    state: latest
-  loop: '{{ homebrew_packages }}'
-  tags: 
-  - brew
-
 - name: Install hombrew cask junk
   homebrew_cask: 
     name: '{{ item }}'
@@ -30,3 +22,13 @@
 
 - name: homebrew cleanup
   command: brew cleanup
+
+# Only works in windows for now *womp womp*
+#- name: Install pwsh modules
+#  win_psmodule: 
+#    name: '{{ item }}'
+#    state: present
+#  loop: '{{ powershell_modules }}'
+#  become: yes
+#  tags:
+#  - pwsh  

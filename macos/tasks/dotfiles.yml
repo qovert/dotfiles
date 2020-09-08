@@ -7,3 +7,16 @@
   - gitconfig
   - tmux.conf
   - vimrc
+
+- name: create pwsh config dir
+  file: 
+    path: ~/.config/powershell
+    state: directory
+    mode: '0750'
+
+- name: powershell profile
+  file:
+    src: '{{ ansible_env.PWD }}/files/pwsh_linux'
+    path: ~/.config/powershell/profile.ps1
+    state: link
+
