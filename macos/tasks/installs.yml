@@ -1,0 +1,34 @@
+- name: homebrew taps
+  command: brew tap {{ item }}
+  loop: '{{ homebrew_taps }}'
+  tags:
+  - brew
+
+- name: Update homebrew
+  homebrew: 
+    name: git
+    state: latest
+    update_homebrew: true
+  tags:
+  - brew
+
+- name: Install hombrew cask junk
+  homebrew_cask: 
+    name: '{{ item }}'
+    state: installed
+  loop: '{{ homebrew_cask_packages }}'
+  tags:
+  - brew
+
+- name: homebrew cleanup
+  command: brew cleanup
+
+# Only works in windows for now *womp womp*
+#- name: Install pwsh modules
+#  win_psmodule: 
+#    name: '{{ item }}'
+#    state: present
+#  loop: '{{ powershell_modules }}'
+#  become: yes
+#  tags:
+#  - pwsh  
