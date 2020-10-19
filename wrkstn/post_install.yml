@@ -1,6 +1,6 @@
 ---
 - name: Workstation Setup
-  hosts: all
+  hosts: localhost
   become: true
 
   vars_files:

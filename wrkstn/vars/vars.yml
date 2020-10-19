@@ -1,0 +1,10 @@
+---
+dotfiles_home: "~"
+dotfiles_files:
+  - .bash_aliases
+  - .bashrc
+  - .gitconfig
+  - .tmux.conf
+  - .vimrc
+
+ansible_connection: local

@@ -18,6 +18,7 @@
     - powerline-fonts
     - tmux
     - screen
+    - fedora-workstation-repositories
     - htop
     - python3-pip
     - remmina

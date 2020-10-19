@@ -1,9 +1,4 @@
 ---
-- name: Google Chrome Repo
-  dnf: 
-    name: 'https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm'
-    state: present
-
 - name: Microsoft Powershell Repo
   yum_repository:
     name: microsoft-prod
