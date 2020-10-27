@@ -14,8 +14,10 @@
   dnf: name={{ item }} state=installed
   with_items:
     - git
+    - calibre
     - powerline
     - powerline-fonts
+    - tmux-powerline
     - tmux
     - screen
     - fedora-workstation-repositories
@@ -36,3 +38,4 @@
     - wireshark
     - lolcat
     - terminus-fonts
+    - starship
