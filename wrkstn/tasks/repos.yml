@@ -23,6 +23,14 @@
     baseurl: "https://packages.microsoft.com/yumrepos/vscode"
     enabled: 1
 
+- name: MSFT Edge Repo
+  yum_repository:
+    name: microsoft-edge
+    description: Repo for Edge dev channel
+    gpgkey: "https://packages.microsoft.com/keys/microsoft.asc"
+    baseurl: "https://packages.microsoft.com/yumrepos/edge"
+    enabled: 1
+
 - name: Docker Repo
   get_url:
     url: https://download.docker.com/linux/fedora/docker-ce.repo
