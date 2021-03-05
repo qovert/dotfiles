@@ -130,4 +130,11 @@ POWERLINE_BASH_SELECT=1
 
 [[ -s "/etc/profile.d/grc.sh" ]] && source /etc/profile.d/grc.sh
 
+# Password generator
+genpasswd() {
+	local l=$1
+       	[ "$l" == "" ] && l=20
+      	tr -dc A-Za-z0-9_ < /dev/urandom | head -c ${l} | xargs
+}
+
 eval "$(starship init bash)"
