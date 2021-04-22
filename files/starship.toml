@@ -1,0 +1,6 @@
+[hostname]
+ssh_only = false
+format = "⟪$hostname⟫ in ($style) "
+style = "bold green"
+trim_at = "."
+disabled = false

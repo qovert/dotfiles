@@ -1,0 +1,13 @@
+- name: Powershell Config
+  file: 
+    path: "~/.config/powershell"
+    state: directory
+    mode: '0755'
+
+- name: Powershell profile
+  file:
+    src: "~/dotfiles/pwsh_linux"
+    dst: "~/.config/powershell/Microsoft.PowerShell_profile.ps1"
+    state: link
+    mode: 0644
+  become: false

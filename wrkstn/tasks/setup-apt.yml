@@ -1,0 +1,33 @@
+---
+- name: Upgrade all
+  apt:
+    name: "*"
+    state: latest
+
+- name: Install pkgs
+  apt: 
+    name: [ 'build-essential','git', 'calibre', 'powerline', 'fonts-powerline',  'tmux', 'screen',
+    'htop', 'python3-pip', 'remmina', 'remmina-plugin-rdp','remmina-plugin-secret', 'wget',
+    'remmina-plugin-spice', 'nextcloud-desktop', 'nmap', 'tilix', 'vim', 'vim-airline', 'curl',
+    'neofetch', 'wireshark', 'lolcat', 'wget', 'apt-transport-https', 'software-properties-common', 
+    'gnupg', 'code', 'azure-cli', 'podman' ]
+
+- name: Add Microsoft repo key
+  apt_key:
+    url: "https://packages.microsoft.com/keys/microsoft.asc"
+    state: present
+
+- name: Azure CLI Repo
+  apt_repository:
+    repo: deb https://packages.microsoft.com/repos/azure-cli/ {{ ansible_distribution_release }} main
+    state: present
+
+- name: VS Code Repo
+  apt_repository:
+    repo: deb https://packages.microsoft.com/repos/code stable main
+    state: present
+
+- name: Microsoft Edge Repo
+  apt_repository:
+    repo: deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main
+    state: present

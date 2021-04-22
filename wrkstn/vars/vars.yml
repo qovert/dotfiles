@@ -1,8 +1,9 @@
 ---
 dotfiles_home: "~"
+dotfiles_repo_local_destination: "~/dotfiles/files"
 dotfiles_files:
-  - .bash_aliases
   - .bashrc
+  - .bash_aliases
   - .gitconfig
   - .tmux.conf
   - .vimrc

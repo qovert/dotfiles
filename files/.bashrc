@@ -108,7 +108,7 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-        source /etc/profile.d/vte.sh
+        source /etc/profile.d/vte*.sh
 fi
 
 # enable programmable completion features (you don't need to enable
@@ -123,12 +123,12 @@ if ! shopt -oq posix; then
 fi
 
 # Powerline setup
-powerline-daemon -q
-POWERLINE_BASH_CONTINUATION=1
-POWERLINE_BASH_SELECT=1
-. /usr/share/powerline/bash/powerline.sh
+#powerline-daemon -q
+#POWERLINE_BASH_CONTINUATION=1
+#POWERLINE_BASH_SELECT=1
+#. /usr/share/powerline/bash/powerline.sh
 
-[[ -s "/etc/profile.d/grc.sh" ]] && source /etc/profile.d/grc.sh
+#[[ -s "/etc/profile.d/grc.sh" ]] && source /etc/profile.d/grc.sh
 
 # Password generator
 genpasswd() {
