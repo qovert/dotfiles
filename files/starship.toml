@@ -1,6 +1,23 @@
 [hostname]
 ssh_only = false
-format = "⟪$hostname⟫ in ($style) "
-style = "bold green"
+format = "<[$hostname]($style)> "
+style = "bold dimmed green"
 trim_at = "."
 disabled = false
+
+[username]
+style_user = "bold dimmed blue"
+show_always = false
+
+[git_status]
+conflicted = "🏳"
+ahead = "🏎💨"
+behind = "😰"
+diverged = "😵"
+untracked = "🤷‍"
+stashed = "📦"
+modified = "📝"
+staged = "➕"
+renamed = "👅"
+deleted = "🗑"
+show_sync_count = true
