@@ -17,7 +17,7 @@ Version: 0.1
 
 <A list of the tasks to be performed — very high level, clearly written>
 | Task | Description | Est. Hours |
-|------|:-----------:|-----------:|
+|------|------------:|-----------:|
 
 ## Deliverables
 
@@ -34,7 +34,7 @@ Version: 0.1
 ## Pricing Estimates
 
 | Item | Description | MRC |
-|------|:-----------:|----:|
+|------|------------:|----:|
 
 | Item | Description | NRC |
-|------|:-----------:|----:|
+|------|------------:|----:|
