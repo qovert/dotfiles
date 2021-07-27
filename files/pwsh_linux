@@ -2,6 +2,8 @@ $histpath = $env:HOME+'/'+'.pwsh_history'
 Register-EngineEvent Powershell.Exiting -Action { Get-History | Export-Clixml $histpath } |Out-Null
 if (Test-Path $histpath) { Import-Clixml $histpath |Add-History }
 
+# add filesize member with human readable sizes
+Update-TypeData -AppendPath ~/dotfiles/files/sysio_fileinfo.ps1xml
 
 function New-ScriptScheduledTask {
     [CmdletBinding()]

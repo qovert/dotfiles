@@ -1,7 +1,7 @@
-[logo]: https://www.enetics.net/assets/images/logo.jpg "Enetics Networks"
-![alt text][logo]
+[logo]: https://www.uwb.edu/uwbothell/media/brand-assets/Logos/left-signature/web-Bothell-left.png "UW Bothell IT"  
+![alt text][ UW Bothell logo]
 Type: Project Proposal  
-Title: <Task or Project Name>  
+Title: <Project Title>
 Author: Brian Harkreader <brian@enetics.net>  
 Prepared for: <Company Name>  
 Date: 

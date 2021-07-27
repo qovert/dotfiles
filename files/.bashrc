@@ -137,4 +137,7 @@ genpasswd() {
       	tr -dc A-Za-z0-9_ < /dev/urandom | head -c ${l} | xargs
 }
 
+export GOPATH="$HOME/go"
+export PATH="$PATH:$GOPATH/bin"
+
 eval "$(starship init bash)"
