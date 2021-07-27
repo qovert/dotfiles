@@ -2,8 +2,7 @@
 dotfiles_home: "~"
 dotfiles_repo_local_destination: "~/dotfiles/files"
 dotfiles_files:
-  - .bashrc
-  - .bash_aliases
+  - .zshrc
   - .gitconfig
   - .tmux.conf
   - .vimrc
