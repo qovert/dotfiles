@@ -1,7 +1,0 @@
-- name: Install junk
-  import_tasks: installs.yml
-
-- name: Link dotfiles
-  import_tasks: dotfiles.yml
-  tags:
-  - dotfiles

@@ -1,2 +1,0 @@
-[workstation]
-127.0.0.1t ansible_connection=local

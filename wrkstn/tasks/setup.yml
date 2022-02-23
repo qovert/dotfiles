@@ -1,4 +1,0 @@
----
-- name: Ansible dependencies
-  raw: dnf install ansible -y
--

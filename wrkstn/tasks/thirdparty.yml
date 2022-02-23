@@ -1,5 +1,0 @@
----
-- name: Microsoft Tools
-  dnf:
-    name: ['powershell','azure-cli','code']
-    state: present
