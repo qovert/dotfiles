@@ -20,7 +20,15 @@ compinit
 
 plugins=(git vscode 1password docker)
 
-eval "$(oh-my-posh init zsh --config '~/.poshthemes/kali.omp.json')"
+case `uname` in
+  Darwin)
+    eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/kali.omp.json)"
+    ;;
+  Linux)
+    eval "$(oh-my-posh init zsh --config '~/.poshthemes/kali.omp.json')"
+    ;;
+esac
+
 eval "$(op completion zsh)"; compdef _op op
 
 # Tilix VTE Config
