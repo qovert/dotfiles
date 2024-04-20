@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH
 
 export POWERSHELL_TELEMETRY_OPTOUT=1
 
@@ -47,4 +47,4 @@ alias dy="dig +short @dns.toys"
 
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-source /home/ditto/.config/op/plugins.sh
+source ~/.config/op/plugins.sh
