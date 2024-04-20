@@ -1,0 +1,50 @@
+# If you come from bash you might have to change your $PATH.
+export PATH=$HOME/.local/bin:/usr/local/bin:$PATH
+
+export POWERSHELL_TELEMETRY_OPTOUT=1
+
+# Terraform creds
+export ARM_SUBSCRIPTION_ID="op://Infra/Azure CLI TF env/ARM_SUBSCRIPTION_id"
+export ARM_TENANT_ID="op://Infra/Azure CLI TF env/ARM_TENANT_ID"
+export ARM_CLIENT_ID="op://Infra/Azure CLI TF env/ARM_CLIENT_ID"
+export ARM_CLIENT_SECRET="op://Infra/Azure CLI TF env/ARM_CLIENT_SECRET"
+
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory
+
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
+autoload -Uz compinit && compinit
+compinit
+
+plugins=(git vscode 1password docker)
+
+eval "$(oh-my-posh init zsh --config '~/.poshthemes/kali.omp.json')"
+eval "$(op completion zsh)"; compdef _op op
+
+# Tilix VTE Config
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+        source /etc/profile.d/vte*.sh
+fi
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
+# custom functions
+getrez() {
+	find $1 -type f -name "*.jpg" -exec identify -format "%f %[fx:w]x%[fx:h]\n" {} \;
+}
+
+# aliases
+alias docker=podman
+alias pwgen="tr -dc A-Za-z-0-9 </dev/urandom |head -c 15 ; echo ''"
+alias dy="dig +short @dns.toys"
+
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+source /home/ditto/.config/op/plugins.sh
