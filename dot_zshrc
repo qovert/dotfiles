@@ -29,7 +29,10 @@ case `uname` in
     ;;
 esac
 
-eval "$(op completion zsh)"; compdef _op op
+if command -v op &>/dev/null; then
+  eval "$(op completion zsh)"; compdef _op op
+  source ~/.config/op/plugins.sh
+fi
 
 # Tilix VTE Config
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
@@ -55,4 +58,3 @@ alias dy="dig +short @dns.toys"
 
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-source ~/.config/op/plugins.sh
