@@ -46,6 +46,13 @@ fi
 #   export EDITOR='mvim'
 # fi
 
+# Set vim key repeat in VSCode for macOS
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  if defaults read com.microsoft.VSCode ApplePressAndHoldEnabled; then
+  defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+  fi
+fi
+
 # custom functions
 getrez() {
 	find $1 -type f -name "*.jpg" -exec identify -format "%f %[fx:w]x%[fx:h]\n" {} \;
