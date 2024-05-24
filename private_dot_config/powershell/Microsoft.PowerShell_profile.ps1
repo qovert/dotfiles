@@ -74,4 +74,3 @@ function Get-MyRGs () {
 if (Get-Command oh-my-posh) { 
 	oh-my-posh init pwsh --config '~/.poshthemes/microverse-power.omp.json' | Invoke-Expression
 }
-
