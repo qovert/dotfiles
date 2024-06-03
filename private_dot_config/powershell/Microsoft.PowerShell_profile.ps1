@@ -76,6 +76,8 @@ if ($IsMacOS -and (get-command oh-my-posh) {
 } elseif ($IsLinux -and (Get-Command oh-my-posh) {
 	oh-my-posh init pwsh --config '~/.poshthemes/microverse-power.omp.json' | Invoke-Expression
 } else {
+  oh-my-posh prompt init pwsh --config $env:POSH_THEMES_PATH/negligible.omp.json | Invoke-Expression
+}
 
 # Vim aliases
 if ($IsWindows) {
