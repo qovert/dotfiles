@@ -1,5 +1,7 @@
-# add filesize member with human readable sizes
-Update-TypeData -AppendPath ~/dotfiles/files/sysio_fileinfo.ps1xml
+# Enable oh-my-posh 
+if (Get-Command oh-my-posh) { 
+	oh-my-posh init pwsh | Invoke-Expression
+}
 
 function New-ScriptScheduledTask {
     [CmdletBinding()]
@@ -72,16 +74,10 @@ function Install-MyModules {
 	Install-Module -Name az -Scope CurrentUser
 	Install-Module -Name Microsoft.PowerShell.RemotingTools -Scope CurrentUser
 	Install-Module -Name posh-git -Scope CurrentUser
-	Install-Module -Name oh-my-posh -Scope CurrentUser
 }
 
 if ( ($host.Name -eq 'ConsoleHost') -and ($null -ne (Get-Module -ListAvailable -Name posh-git)) ) {
 	Import-Module posh-git
-}
-
-if ( ($host.Name -eq 'ConsoleHost') -and ($null -ne (Get-Module -ListAvailable -Name oh-my-posh)) ) {
-	Import-Module oh-my-posh
-	Set-PoshPrompt ys
 }
 
 # Functions
