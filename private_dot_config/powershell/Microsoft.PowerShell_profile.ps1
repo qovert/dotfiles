@@ -70,7 +70,7 @@ function Get-MyRGs () {
 	sort-object ResourceGroupName
 }
 
-# Enable oh-my-posh 
+# Enable oh-my-posh for different OSes
 if ($IsMacOS -and (get-command oh-my-posh)) {
   oh-my-posh init pwsh --config "$(brew --prefix oh-my-posh)/themes/negligible.omp.json"
 } elseif ($IsLinux -and (Get-Command oh-my-posh) {
