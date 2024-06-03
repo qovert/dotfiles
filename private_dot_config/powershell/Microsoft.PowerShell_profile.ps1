@@ -74,3 +74,9 @@ function Get-MyRGs () {
 if (Get-Command oh-my-posh) { 
 	oh-my-posh init pwsh --config '~/.poshthemes/microverse-power.omp.json' | Invoke-Expression
 }
+
+# Vim aliases
+if ($IsWindows) {
+  New-Alias -Name vi -Value 'C:\Program Files\vim\vim90\vim.exe'
+  New-Alias -Name vim -Value 'C:\Program Files\vim\vim90\vim.exe'
+}
