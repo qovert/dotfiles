@@ -71,9 +71,11 @@ function Get-MyRGs () {
 }
 
 # Enable oh-my-posh 
-if (Get-Command oh-my-posh) { 
+if ($IsMacOS -and (get-command oh-my-posh) {
+  oh-my-posh init pwsh --config "$(brew --prefix oh-my-posh)/themes/kali.omp.json"
+} elseif ($IsLinux -and (Get-Command oh-my-posh) {
 	oh-my-posh init pwsh --config '~/.poshthemes/microverse-power.omp.json' | Invoke-Expression
-}
+} else {
 
 # Vim aliases
 if ($IsWindows) {
