@@ -59,7 +59,10 @@ getrez() {
 }
 
 # aliases
-alias docker=podman
+if command -v podman > /dev/null
+then
+  alias docker=podman
+fi
 alias pwgen="tr -dc A-Za-z-0-9 </dev/urandom |head -c 15 ; echo ''"
 alias dy="dig +short @dns.toys"
 
