@@ -73,7 +73,7 @@ function Get-MyRGs () {
 # Enable oh-my-posh for different OSes
 if ($IsMacOS -and (get-command oh-my-posh)) {
   $brewPrefix = Invoke-Expression -Command 'brew --prefix oh-my-posh'
-  oh-my-posh init pwsh --config "$brewPrefix/themes/negligible.omp.json"
+  & ([ScriptBlock]::Create((oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\negligible.omp.json" --print) -join "`n"))
 } elseif ($IsLinux -and (Get-Command oh-my-posh)) {
 	oh-my-posh init pwsh --config '~/.poshthemes/microverse-power.omp.json' | Invoke-Expression
 } else {
