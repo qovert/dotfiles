@@ -1,3 +1,8 @@
+$scriptsPath = "~/bin/pwsh"
+Get-ChildItem -Path $scriptsPath -Filter *.ps1 | ForEach-Object {
+  . $_.FullName
+}
+
 function New-ScriptScheduledTask {
     [CmdletBinding()]
     param (
