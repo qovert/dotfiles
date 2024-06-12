@@ -69,12 +69,6 @@ function Select-Value { # src: https://geekeefy.wordpress.com/2017/06/26/selecti
     }
 }
 
-function Get-MyRGs () { 
-	Get-AzResourceGroup | 
-	select ResourceGroupName,Location | 
-	sort-object ResourceGroupName
-}
-
 # Enable oh-my-posh for different OSes
 if ($IsMacOS -and (get-command oh-my-posh)) {
   $brewPrefix = Invoke-Expression -Command 'brew --prefix oh-my-posh'
