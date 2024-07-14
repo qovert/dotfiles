@@ -3,6 +3,15 @@ Get-ChildItem -Path $scriptsPath -Filter *.ps1 | ForEach-Object {
   . $_.FullName
 }
 
+# set some environmental variables
+$env:POWERSHELL_CLI_TELEMETRY_OPTOUT = 1 
+$env:POWERSHELL_TELEMETRY_OPTOUT = 1
+$env:POWERSHELL_UPDATECHECK = Off 
+$env:POWERSHELL_UPDATECHECK_OPTOUT = 1
+$env:DOTNET_CLI_TELEMETRY_OPTOUT = 1 
+$env:DOTNET_TELEMETRY_OPTOUT = 1 
+$env:COMPlus_EnableDiagnostics = 0
+
 function New-ScriptScheduledTask {
     [CmdletBinding()]
     param (
