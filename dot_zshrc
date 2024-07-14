@@ -31,7 +31,9 @@ esac
 
 if command -v op &>/dev/null; then
   eval "$(op completion zsh)"; compdef _op op
-  source ~/.config/op/plugins.sh
+  if [[ -f ~/.config/op/plugins.sh ]]; then
+    source ~/.config/op/plugins.sh
+  fi
 fi
 
 # Tilix VTE Config
