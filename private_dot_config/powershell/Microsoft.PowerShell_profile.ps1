@@ -74,7 +74,7 @@ if ($IsMacOS -and (get-command oh-my-posh)) {
   $brewPrefix = Invoke-Expression -Command 'brew --prefix oh-my-posh'
   & ([ScriptBlock]::Create((oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\negligible.omp.json" --print) -join "`n"))
 } elseif ($IsLinux -and (Get-Command oh-my-posh)) {
-	oh-my-posh init pwsh --config '~/.poshthemes/microverse-power.omp.json' | Invoke-Expression
+	oh-my-posh init pwsh --config '~/.config/omp_themes/microverse-power.omp.json' | Invoke-Expression
 } else {
   oh-my-posh prompt init pwsh --config $env:POSH_THEMES_PATH/negligible.omp.json | Invoke-Expression
 }
