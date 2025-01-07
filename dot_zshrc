@@ -60,6 +60,11 @@ getrez() {
 	find $1 -type f -name "*.jpg" -exec identify -format "%f %[fx:w]x%[fx:h]\n" {} \;
 }
 
+# Workaround for ghostty not seeming to know how to be xterm compatable
+if [[ "$TERM_PROGRAM" == "ghostty" ]]; then
+    export TERM=xterm-256color
+fi
+
 # aliases
 if command -v podman > /dev/null
 then
