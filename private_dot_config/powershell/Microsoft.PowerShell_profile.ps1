@@ -92,3 +92,5 @@ if ($IsWindows) {
   New-Alias -Name vi -Value 'C:\Program Files\vim\vim90\vim.exe'
   New-Alias -Name vim -Value 'C:\Program Files\vim\vim90\vim.exe'
 }
+
+New-Alias -Name python -Value /usr/bin/python3
