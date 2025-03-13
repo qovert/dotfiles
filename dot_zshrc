@@ -1,7 +1,12 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/.local/share/bob/nvim-bin:$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.local/share/$USER/nvim-bin:$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH
 
+# Powershell slow.
 export POWERSHELL_TELEMETRY_OPTOUT=1
+
+# Python stuff
+export WORKON_HOME=$HOME/.virtualenvs
+source /home/$USER/.local/bin/virtualenvwrapper.sh
 
 # Terraform creds
 export ARM_SUBSCRIPTION_ID="op://Infra/Azure CLI TF env/ARM_SUBSCRIPTION_id"
