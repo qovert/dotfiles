@@ -6,7 +6,11 @@ export POWERSHELL_TELEMETRY_OPTOUT=1
 
 # Python stuff
 export WORKON_HOME=$HOME/.virtualenvs
-source /home/$USER/.local/bin/virtualenvwrapper.sh
+if [[ -e /home/$USER/.local/bin/virtualenvwrapper.sh ]]; then
+  source /home/$USER/.local/bin/virtualenvwrapper.sh
+elif [[ -e /usr/local/bin/virtualenvwrapper.sh ]]; then
+  source /usr/local/bin/virtualenvwrapper.sh
+fi
 
 # Terraform creds
 export ARM_SUBSCRIPTION_ID="op://Infra/Azure CLI TF env/ARM_SUBSCRIPTION_id"
