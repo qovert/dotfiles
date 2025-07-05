@@ -1,6 +1,52 @@
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/.local/share/$USER/nvim-bin:$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH
 
+# Set path env between multiple systems
+# Helper function to safely add to PATH
+add_to_path() {
+    if [[ -d "$1" && ":$PATH:" != *":$1:"* ]]; then
+        export PATH="$1:$PATH"
+    fi
+}
+
+# Common paths for all systems
+add_to_path "$HOME/bin"
+add_to_path "$HOME/.local/bin"
+
+# OS-specific paths
+case "$(uname -s)" in
+    Darwin*)
+        # macOS Homebrew paths
+        add_to_path "/opt/homebrew/bin"
+        add_to_path "/opt/homebrew/sbin"
+        add_to_path "/usr/local/bin"
+
+        # macOS app paths
+        add_to_path "/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+        add_to_path "/Applications/Docker.app/Contents/Resources/bin"
+
+        # macOS HOME paths
+        "$HOME/Library/Python/3.9/bin"
+        "$HOME/bin"
+        ;;
+    Linux*)
+        # System addition
+        add_to_path "/usr/local/bin"
+        
+        # Linux Homebrew (if installed)
+        add_to_path "/home/linuxbrew/.linuxbrew/bin"
+        add_to_path "/home/linuxbrew/.linuxbrew/sbin"
+
+        # Flatpak exports
+        add_to_path "/var/lib/flatpak/exports/bin"
+        add_to_path "$HOME/.local/share/flatpak/exports/bin"
+
+        # Local stuff
+        add_to_path "$HOME/.local/bin"
+        add_to_path "$HOME/bin"
+        ;;
+esac
+
 # Powershell slow.
 export POWERSHELL_TELEMETRY_OPTOUT=1
 
