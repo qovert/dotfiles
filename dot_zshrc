@@ -26,8 +26,8 @@ case "$(uname -s)" in
         add_to_path "/Applications/Docker.app/Contents/Resources/bin"
 
         # macOS HOME paths
-        "$HOME/Library/Python/3.9/bin"
-        "$HOME/bin"
+        add_to_path "$HOME/Library/Python/3.9/bin"
+        add_to_path "$HOME/bin"
         ;;
     Linux*)
         # System addition
