@@ -128,6 +128,7 @@ fi
 alias pwgen="tr -dc A-Za-z-0-9 </dev/urandom |head -c 15 ; echo ''"
 alias dy="dig +short @dns.toys"
 alias python="python3"
+alias pdf2cbz=$HOME/bin/pdf_to_cbz.sh
 
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
