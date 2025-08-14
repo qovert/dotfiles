@@ -12,6 +12,7 @@ add_to_path() {
 # Common paths for all systems
 add_to_path "$HOME/bin"
 add_to_path "$HOME/.local/bin"
+add_to_path "$HOME/go/bin"
 
 # OS-specific paths
 case "$(uname -s)" in
