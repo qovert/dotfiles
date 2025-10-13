@@ -4,7 +4,7 @@
 # Set path env between multiple systems
 # Helper function to safely add to PATH
 add_to_path() {
-    if [iiij[ -d "$1" && ":$PATH:" != *":$1:"* ]]; then
+    if [[ -d "$1" && ":$PATH:" != *":$1:"* ]]; then
         export PATH="$1:$PATH"
     fi
 }
@@ -98,6 +98,8 @@ if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
 fi
 
 # Preferred editor for local and remote sessions
+export EDITOR='vim'
+
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
 # else
