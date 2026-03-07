@@ -23,6 +23,6 @@ highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE gui
 set noerrorbells visualbell t_vb=
 
 " Auto-insert shebang and safety flags for new shell scripts
-autocmd BufNewFile *.sh 0read !echo e "#!/usr/bin/env bash\nset -euo pipefile\n\n"
+autocmd BufNewFile *.sh 0read !echo e "\#!/usr/bin/env bash\nset -euo pipefile\n\n"
 autocmd BufNewFile *.sh normal! G
 autocmd BufWritePost *.sh silent !chmod +x <afile>
