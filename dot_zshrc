@@ -59,11 +59,8 @@ elif [[ -e /usr/local/bin/virtualenvwrapper.sh ]]; then
   source /usr/local/bin/virtualenvwrapper.sh
 fi
 
-# Terraform creds
-export ARM_SUBSCRIPTION_ID="op://Infra/Azure CLI TF env/ARM_SUBSCRIPTION_id"
-export ARM_TENANT_ID="op://Infra/Azure CLI TF env/ARM_TENANT_ID"
-export ARM_CLIENT_ID="op://Infra/Azure CLI TF env/ARM_CLIENT_ID"
-export ARM_CLIENT_SECRET="op://Infra/Azure CLI TF env/ARM_CLIENT_SECRET"
+# 1password
+export SSH_AUTH_SOCK=~/.1password/agent.sock
 
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
