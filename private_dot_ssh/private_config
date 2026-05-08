@@ -1,0 +1,8 @@
+# Personal GitHub account (qovert)
+Host github-personal
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/qovert.pub
+  IdentitiesOnly yes
+
+Include ~/.ssh/1Password/config
