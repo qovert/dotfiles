@@ -60,7 +60,11 @@ elif [[ -e /usr/local/bin/virtualenvwrapper.sh ]]; then
 fi
 
 # 1password
-export SSH_AUTH_SOCK=~/.1password/agent.sock
+if [[ "$(uname -s)" == "Darwin" ]]; then
+    export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+else
+    export SSH_AUTH_SOCK="$HOME/.1password/agent.sock"
+fi
 
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
