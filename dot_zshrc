@@ -128,6 +128,53 @@ pdf2cbz() {
   $HOME/bin/pdf_to_cbz.sh "$@"
 }
 
+# rustypaste upload -- token lives outside this repo (dotfiles are public):
+#   mkdir -p ~/.config/rustypaste && chmod 700 ~/.config/rustypaste
+#   echo '<token>' > ~/.config/rustypaste/token && chmod 600 ~/.config/rustypaste/token
+paste() {
+  local token_file="${RUSTYPASTE_TOKEN_FILE:-$HOME/.config/rustypaste/token}"
+  local url="${RUSTYPASTE_URL:-https://bin.hrkr.io}"
+
+  if [[ ! -f "$token_file" ]]; then
+    echo "paste: no token file at $token_file" >&2
+    echo "  echo '<token>' > $token_file && chmod 600 $token_file" >&2
+    return 1
+  fi
+
+  local token
+  token=$(<"$token_file")
+
+  local result
+  if [[ $# -gt 0 ]]; then
+    local curl_args=()
+    for f in "$@"; do
+      curl_args+=(-F "file=@$f")
+    done
+    result=$(curl -sf "${curl_args[@]}" -H "Authorization: $token" "$url")
+  elif [[ ! -t 0 ]]; then
+    result=$(curl -sf -F "file=@-;filename=paste.txt" -H "Authorization: $token" "$url")
+  else
+    echo "usage: paste <file> [<file2> ...]" >&2
+    echo "       cmd | paste" >&2
+    return 1
+  fi
+
+  if [[ -z "$result" ]]; then
+    echo "paste: upload failed (bad token, or server unreachable)" >&2
+    return 1
+  fi
+
+  echo "$result"
+
+  if command -v wl-copy >/dev/null 2>&1; then
+    echo -n "$result" | wl-copy
+  elif command -v xclip >/dev/null 2>&1; then
+    echo -n "$result" | xclip -selection clipboard
+  elif command -v pbcopy >/dev/null 2>&1; then
+    echo -n "$result" | pbcopy
+  fi
+}
+
 # aliases
 if command -v podman > /dev/null
 then
