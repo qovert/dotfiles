@@ -1,0 +1,22 @@
+# Managed by chezmoi — edit private_dot_ssh/private_config.tmpl in the dotfiles repo.
+# Machine-specific hosts (e.g. the homelab) live in ~/.ssh/config.d/, which
+# chezmoi doesn't manage. Keep this Include first: ssh uses the first value it
+# finds for each option, so the included, more specific blocks must win.
+Include ~/.ssh/config.d/*
+
+# GitHub — personal account (qovert) only
+Host github.com github-personal
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/qovert.pub
+  IdentitiesOnly yes
+
+Include ~/.ssh/1Password/config
+
+# 1Password SSH agent — set here too so it works without the shell rc's SSH_AUTH_SOCK
+Host *
+{{- if eq .chezmoi.os "darwin" }}
+  IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+{{- else }}
+  IdentityAgent ~/.1password/agent.sock
+{{- end }}
