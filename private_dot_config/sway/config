@@ -100,7 +100,8 @@ bindsym $mod+l exec $lock
 bindsym Print exec sh -c 'grim -g "$(slurp)" - | wl-copy'
 bindsym Shift+Print exec sh -c 'grim - | wl-copy'
 bindsym $mod+Shift+c reload
-bindsym $mod+Shift+e exec swaynag -t warning -m 'Exit sway?' -B 'Log out' 'swaymsg exit'
+# Lock / log out / suspend / restart / shut down
+bindsym $mod+Shift+e exec ~/.local/bin/power-menu
 
 # Get the physical monitors back if a remote session didn't clean up
 bindsym $mod+Control+Shift+r exec ~/.local/bin/remote-off

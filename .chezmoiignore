@@ -13,4 +13,5 @@
 .local/bin/remote-off
 .local/bin/wallpaper-rotate
 .local/bin/layout-main
+.local/bin/power-menu
 {{ end }}

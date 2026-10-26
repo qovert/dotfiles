@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Session/power menu in fuzzel, bound to Super+Shift+E.
+# Lock is first so an accidental Enter is harmless.
+set -euo pipefail
+
+choice=$(printf '%s\n' Lock 'Log out' Suspend Restart 'Shut down' |
+    fuzzel --dmenu --prompt 'power › ' --lines 5 --width 20) || exit 0
+
+case $choice in
+    Lock) swaylock -f -c 1e1e2e ;;
+    'Log out') swaymsg exit ;;
+    Suspend) systemctl suspend ;;
+    Restart) systemctl reboot ;;
+    'Shut down') systemctl poweroff ;;
+esac
