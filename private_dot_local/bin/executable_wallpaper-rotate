@@ -13,7 +13,8 @@ while true; do
     else
         bg='output * bg #1e1e2e solid_color'
     fi
+    # Exit with the session: nothing else stops this loop when sway quits
+    swaymsg "$bg" >/dev/null || exit 0
     printf '%s\n' "$bg" > "$current"
-    swaymsg "$bg" >/dev/null
     sleep "$interval"
 done
