@@ -111,6 +111,8 @@ bindsym Mod1+F4 kill
 bindsym $mod+f fullscreen toggle
 bindsym $mod+Up fullscreen toggle
 bindsym $mod+Shift+space floating toggle
+# Super+left-drag moves windows (tiled too), Super+right-drag resizes
+floating_modifier $mod normal
 bindsym $mod+Tab workspace back_and_forth
 bindsym Mod1+Tab focus next
 bindsym Mod1+Shift+Tab focus prev
