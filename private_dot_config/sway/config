@@ -84,10 +84,9 @@ for_window [class="steam" title="^(Friends List|Steam Settings|Steam - News)"] f
 # Nothing fullscreen (games, video) ever gets blanked or locked
 for_window [all] inhibit_idle fullscreen
 
-# Games: own workspace, tearing allowed
+# Games: own workspace. Tearing follows the game's own VSync setting
+# (output * allow_tearing above permits it; a per-window "yes" would force it).
 assign [class="steam_app_.*"] workspace number 10
-for_window [class="steam_app_.*"] allow_tearing yes
-for_window [class="gamescope"] allow_tearing yes
 
 # --- Keys: launch / session --------------------------------------------------
 bindsym $mod+Return exec $term
