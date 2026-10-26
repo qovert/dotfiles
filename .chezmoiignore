@@ -9,6 +9,8 @@
 .config/systemd/user/sway-session.target.d
 .config/systemd/user/toolbox-start.service
 .config/systemd/user/graphical-session.target.wants/toolbox-start.service
+.config/systemd/user/app-dev.lizardbyte.app.Sunshine.service.d
+.config/systemd/user/sway-session.target.wants
 .local/bin/remote-on
 .local/bin/remote-off
 .local/bin/wallpaper-rotate

@@ -58,9 +58,9 @@ exec nm-applet --indicator
 exec blueman-applet
 exec wl-paste --watch cliphist store
 
-# Remote access over Tailscale: Moonlight (Sunshine). wayvnc is the
+# Remote access over Tailscale: Moonlight (Sunshine) runs as a systemd user
+# unit tied to sway-session.target, so it restarts if it dies. wayvnc is the
 # clipboard-capable fallback; uncomment to use it.
-exec sunshine
 # exec sh -c 'wayvnc "$(tailscale ip -4)"'
 
 exec swayidle -w \
