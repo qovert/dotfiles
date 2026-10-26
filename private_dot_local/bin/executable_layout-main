@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+# Build the GNOME-style main workspace: terminal | Firefox | terminal at
+# 22% / 56% / 22%. Runs at sway login for workspace 1, and from
+# Super+Shift+Home for the focused workspace (which must be empty).
+#   layout-main [workspace-number]
+set -euo pipefail
+
+ws=${1:-$(swaymsg -rt get_workspaces | jq -r '.[] | select(.focused) | .num')}
+term='ptyxis --new-window'
+
+notify() { notify-send -a sway "layout-main" "$1" 2>/dev/null || true; }
+
+window_count() {
+    swaymsg -rt get_tree | jq --argjson ws "$ws" \
+        '[.. | objects | select(.type=="workspace" and .num==$ws)
+         | .. | objects | select(.type=="con" or .type=="floating_con") | select(.pid)] | length'
+}
+
+ids() {
+    swaymsg -rt get_tree | jq -r --arg re "$1" \
+        '.. | objects | select(.pid and ((.app_id // .window_properties.class // "") | test($re))) | .id' | sort
+}
+
+# Launch a command and print the con id of the first new window matching
+# the app_id regex (Firefox can take a while on a cold start).
+spawn() {
+    local re=$1 cmd=$2 before new
+    before=$(ids "$re")
+    swaymsg exec "$cmd" >/dev/null
+    for _ in $(seq 1 150); do
+        new=$(comm -13 <(echo "$before") <(ids "$re") | head -1)
+        if [[ -n $new ]]; then echo "$new"; return 0; fi
+        sleep 0.2
+    done
+    return 1
+}
+
+# Open the window next to the anchor so the row ends up in order, and pull
+# it back to the workspace in case focus wandered while it was starting.
+place() {
+    local mark=$1 re=$2 cmd=$3 id
+    id=$(spawn "$re" "$cmd") || { notify "Timed out waiting for: $cmd"; exit 1; }
+    swaymsg "[con_id=$id] move container to workspace number $ws, mark --replace $mark" >/dev/null
+    swaymsg "[con_id=$id] focus" >/dev/null
+}
+
+if (( $(window_count) > 0 )); then
+    notify "Workspace $ws isn't empty, not building the layout"
+    exit 0
+fi
+
+# A cold start restores the last Firefox session; otherwise open a new window
+if pgrep -x firefox >/dev/null; then ff='firefox --new-window'; else ff=firefox; fi
+
+swaymsg "workspace number $ws" >/dev/null
+place main-left '^org\.gnome\.Ptyxis$' "$term"
+place main-center '^org\.mozilla\.firefox$' "$ff"
+place main-right '^org\.gnome\.Ptyxis$' "$term"
+
+swaymsg "[con_mark=main-left] resize set width 22 ppt" >/dev/null
+swaymsg "[con_mark=main-right] resize set width 22 ppt" >/dev/null
+swaymsg "[con_mark=main-center] focus" >/dev/null

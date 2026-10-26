@@ -36,6 +36,8 @@ client.unfocused        #313244 #313244 #a6adc8 #313244   #313244
 
 # Wallpaper slideshow from the same folder azwallpaper uses
 exec ~/.local/bin/wallpaper-rotate
+# terminal | Firefox | terminal on workspace 1, like the GNOME tiling layout
+exec ~/.local/bin/layout-main 1
 
 # --- Input -------------------------------------------------------------------
 input type:keyboard {
@@ -135,6 +137,8 @@ bindsym $mod+t layout toggle split
 bindsym $mod+a focus parent
 bindsym $mod+c resize set width 56 ppt
 bindsym $mod+x resize set width 22 ppt
+# Build terminal | Firefox | terminal on the focused (empty) workspace
+bindsym $mod+Shift+Home exec ~/.local/bin/layout-main
 
 mode "resize" {
     bindsym Left resize shrink width 40px

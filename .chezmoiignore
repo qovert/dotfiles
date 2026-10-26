@@ -12,4 +12,5 @@
 .local/bin/remote-on
 .local/bin/remote-off
 .local/bin/wallpaper-rotate
+.local/bin/layout-main
 {{ end }}
