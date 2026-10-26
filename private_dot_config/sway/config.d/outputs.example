@@ -2,7 +2,8 @@
 # Copy to `outputs` next to this file (git-ignored) and fill in.
 # List connectors with: swaymsg -t get_outputs
 
-# Main monitor
+# Main monitor. Keep it at 0 0 (top-align the others): an offset makes
+# Wine/XWayland games misplace clicks near the bottom of the screen.
 output DP-1 mode 3840x2160@60Hz scale 1.5 pos 0 0
 # Second monitor, portrait to the right
 output HDMI-A-1 mode 2560x1600 scale 1.333333 transform 90 pos 2560 0
