@@ -3,13 +3,17 @@
 # Picks a random image from the folder every WALLPAPER_INTERVAL seconds.
 dir=${WALLPAPER_DIR:-$HOME/Seafile/Wallpapers/HighRes}
 interval=${WALLPAPER_INTERVAL:-1800}
+# Included by the sway config, so a reload keeps the current image
+current="${XDG_RUNTIME_DIR:-/tmp}/sway-wallpaper.conf"
 
 while true; do
     img=$(find "$dir" -maxdepth 1 -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' \) 2>/dev/null | shuf -n 1)
     if [[ -n $img ]]; then
-        swaymsg "output * bg \"$img\" fill" >/dev/null
+        bg="output * bg \"$img\" fill"
     else
-        swaymsg 'output * bg #1e1e2e solid_color' >/dev/null
+        bg='output * bg #1e1e2e solid_color'
     fi
+    printf '%s\n' "$bg" > "$current"
+    swaymsg "$bg" >/dev/null
     sleep "$interval"
 done

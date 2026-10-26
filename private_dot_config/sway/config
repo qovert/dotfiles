@@ -12,6 +12,8 @@ set $lock swaylock -f -c 1e1e2e
 # Per-machine monitors and workspace placement. The real file is git-ignored;
 # copy config.d/outputs.example to config.d/outputs in the chezmoi source.
 include ~/.config/sway/config.d/*
+# Current slideshow image, written by wallpaper-rotate
+include $XDG_RUNTIME_DIR/sway-wallpaper.conf
 # Written by remote-on during a Moonlight session, removed by remote-off
 include $XDG_RUNTIME_DIR/sway-remote.conf
 
