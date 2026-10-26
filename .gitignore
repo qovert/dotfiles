@@ -6,3 +6,6 @@
 .pwsh_history
 .python_history
 history.txt
+
+# Per-machine config: commit the .example, keep the real file local
+private_dot_config/sway/config.d/outputs

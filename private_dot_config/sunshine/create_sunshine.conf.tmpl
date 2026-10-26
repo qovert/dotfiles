@@ -1,0 +1,5 @@
+# Seeded by chezmoi once; Sunshine's web UI (https://localhost:47990) owns it after.
+capture = wlr
+encoder = vaapi
+adapter_name = /dev/dri/renderD128
+global_prep_cmd = [{"do":"{{ .chezmoi.homeDir }}/.local/bin/remote-on","undo":"{{ .chezmoi.homeDir }}/.local/bin/remote-off"}]

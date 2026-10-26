@@ -1,0 +1,13 @@
+# Ptyxis only execs into running containers, so start all toolboxes at login.
+[Unit]
+Description=Start toolbox containers
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/sh -c 'podman start $(podman ps -aq --filter label=com.github.containers.toolbox=true)'
+
+[Install]
+WantedBy=graphical-session.target

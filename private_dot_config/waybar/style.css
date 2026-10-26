@@ -1,0 +1,45 @@
+* {
+  font-family: "Cantarell", sans-serif;
+  font-size: 13px;
+  min-height: 0;
+}
+
+window#waybar {
+  background: rgba(30, 30, 46, 0.92);
+  color: #cdd6f4;
+}
+
+#workspaces button {
+  padding: 0 8px;
+  color: #a6adc8;
+  border-radius: 0;
+}
+
+#workspaces button.focused {
+  color: #1e1e2e;
+  background: #89b4fa;
+}
+
+#workspaces button.urgent {
+  background: #f38ba8;
+  color: #1e1e2e;
+}
+
+#mode {
+  background: #f9e2af;
+  color: #1e1e2e;
+  padding: 0 8px;
+}
+
+#temperature.critical,
+#custom-gpu.hot {
+  color: #f38ba8;
+}
+
+#custom-tailscale.off {
+  color: #6c7086;
+}
+
+#idle_inhibitor.activated {
+  color: #f9e2af;
+}

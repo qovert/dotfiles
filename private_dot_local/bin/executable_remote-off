@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# Undo remote-on: bring the physical monitors back and drop the virtual output.
+# Workspaces return to their assigned monitors. Bound to Super+Ctrl+Shift+R
+# in case a session ends without Sunshine running this.
+set -euo pipefail
+
+state="${XDG_RUNTIME_DIR:-/tmp}/remote-outputs"
+
+# Remove the reload overlay first so a reload from here on restores the monitors
+rm -f "${XDG_RUNTIME_DIR:-/tmp}/sway-remote.conf"
+
+if [[ -s $state ]]; then
+    while read -r o; do
+        swaymsg output "$o" enable >/dev/null
+    done < "$state"
+    rm -f "$state"
+else
+    swaymsg output '*' enable >/dev/null
+fi
+
+for o in $(swaymsg -rt get_outputs | jq -r '.[] | select(.name | startswith("HEADLESS-")) | .name'); do
+    swaymsg output "$o" unplug >/dev/null
+done

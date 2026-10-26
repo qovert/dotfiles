@@ -1,0 +1,20 @@
+# Per-machine outputs and workspace placement for sway.
+# Copy to `outputs` next to this file (git-ignored) and fill in.
+# List connectors with: swaymsg -t get_outputs
+
+# Main monitor
+output DP-1 mode 3840x2160@60Hz scale 1.5 pos 0 0
+# Second monitor, portrait to the right
+output HDMI-A-1 mode 2560x1600 scale 1.333333 transform 90 pos 2560 0
+
+# Pin workspaces to monitors; later names are fallbacks when one is unplugged
+workspace 1 output DP-1
+workspace 2 output DP-1
+workspace 3 output DP-1
+workspace 4 output DP-1
+workspace 5 output DP-1
+workspace 6 output HDMI-A-1 DP-1
+workspace 7 output HDMI-A-1 DP-1
+workspace 8 output HDMI-A-1 DP-1
+workspace 9 output HDMI-A-1 DP-1
+workspace 10 output DP-1

@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+# Move the sway session onto a virtual output sized for the remote laptop.
+# Run by Sunshine on connect (it sets SUNSHINE_CLIENT_*), or by hand:
+#   remote-on 2560 1600 [fps]
+# Overrides go in ~/.config/sway/remote.env:
+#   REMOTE_SCALE=1.5        # otherwise guessed from the width
+#   REMOTE_BLANK_LOCAL=0    # keep the physical monitors on while remote
+set -euo pipefail
+
+w=${1:-${SUNSHINE_CLIENT_WIDTH:-1920}}
+h=${2:-${SUNSHINE_CLIENT_HEIGHT:-1080}}
+fps=${3:-${SUNSHINE_CLIENT_FPS:-60}}
+state="${XDG_RUNTIME_DIR:-/tmp}/remote-outputs"
+# Included last by the sway config, so a reload keeps the remote layout
+overlay="${XDG_RUNTIME_DIR:-/tmp}/sway-remote.conf"
+
+[[ -f ~/.config/sway/remote.env ]] && . ~/.config/sway/remote.env
+
+if [[ -z ${REMOTE_SCALE:-} ]]; then
+    if (( w >= 2800 )); then REMOTE_SCALE=2
+    elif (( w >= 2400 )); then REMOTE_SCALE=1.5
+    else REMOTE_SCALE=1
+    fi
+fi
+
+headless_outputs() {
+    swaymsg -rt get_outputs | jq -r '.[] | select(.name | startswith("HEADLESS-")) | .name'
+}
+
+headless=$(headless_outputs | head -1)
+if [[ -z $headless ]]; then
+    swaymsg create_output >/dev/null
+    headless=$(headless_outputs | tail -1)
+fi
+swaymsg output "$headless" mode "${w}x${h}@${fps}Hz" scale "$REMOTE_SCALE" >/dev/null
+
+# Turning the monitors off moves every workspace onto the virtual output
+# and keeps the session off the screens at home while you're away.
+if [[ ${REMOTE_BLANK_LOCAL:-1} == 1 ]]; then
+    physical=$(swaymsg -rt get_outputs | jq -r '.[] | select(.active and (.name | startswith("HEADLESS-") | not)) | .name')
+    # Don't clobber the saved list if this runs twice
+    [[ -n $physical ]] && printf '%s\n' "$physical" > "$state"
+    for o in $physical; do
+        swaymsg output "$o" disable >/dev/null
+    done
+fi
+
+{
+    echo "output $headless mode ${w}x${h}@${fps}Hz scale $REMOTE_SCALE"
+    if [[ ${REMOTE_BLANK_LOCAL:-1} == 1 && -s $state ]]; then
+        sed 's/^\(.*\)$/output \1 disable/' "$state"
+    fi
+} > "$overlay"
