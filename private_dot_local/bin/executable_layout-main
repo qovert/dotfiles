@@ -6,7 +6,7 @@
 set -euo pipefail
 
 ws=${1:-$(swaymsg -rt get_workspaces | jq -r '.[] | select(.focused) | .num')}
-term='ptyxis --new-window'
+term='ghostty +new-window'
 
 notify() { notify-send -a sway "layout-main" "$1" 2>/dev/null || true; }
 
@@ -53,9 +53,9 @@ fi
 if pgrep -x firefox >/dev/null; then ff='firefox --new-window'; else ff=firefox; fi
 
 swaymsg "workspace number $ws" >/dev/null
-place main-left '^org\.gnome\.Ptyxis$' "$term"
+place main-left '^com\.mitchellh\.ghostty$' "$term"
 place main-center '^org\.mozilla\.firefox$' "$ff"
-place main-right '^org\.gnome\.Ptyxis$' "$term"
+place main-right '^com\.mitchellh\.ghostty$' "$term"
 
 swaymsg "[con_mark=main-left] resize set width 22 ppt" >/dev/null
 swaymsg "[con_mark=main-right] resize set width 22 ppt" >/dev/null

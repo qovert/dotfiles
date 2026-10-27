@@ -59,7 +59,7 @@
     "exec": "~/.config/waybar/scripts/tailscale.sh",
     "return-type": "json",
     "interval": 15,
-    "on-click": "ptyxis --new-window -- sh -c 'tailscale status; read -r _'"
+    "on-click": "ghostty +new-window -e sh -c 'tailscale status; read -r _'"
   },
   "pulseaudio": {
     "format": "{icon}  {volume}%",

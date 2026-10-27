@@ -18,4 +18,5 @@
 .local/bin/layout-main
 .local/bin/power-menu
 .local/bin/lock-screen
+.local/bin/toolbox-term
 {{ end }}

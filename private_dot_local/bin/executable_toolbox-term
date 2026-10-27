@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Open a ghostty window on the host or inside a toolbox container, picked in
+# fuzzel. Stands in for Ptyxis's container tabs. Bound to Super+Shift+Return.
+set -euo pipefail
+
+containers=$(podman ps -a --filter label=com.github.containers.toolbox=true --format '{{.Names}}' | sort)
+choice=$(printf 'host\n%s\n' "$containers" | sed '/^$/d' |
+    fuzzel --dmenu --prompt 'terminal › ' --minimal-lines --lines 10 --width 30) || exit 0
+
+if [[ $choice == host ]]; then
+    exec ghostty +new-window
+fi
+exec ghostty +new-window --title="toolbox: $choice" -e toolbox enter "$choice"

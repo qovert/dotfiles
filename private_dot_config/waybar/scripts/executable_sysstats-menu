@@ -60,5 +60,5 @@ choice=$(printf '%s\n' \
     fuzzel --dmenu --prompt 'stats › ' --lines 10 --width 58 --anchor top-right \
         --x-margin 6 --y-margin 4 --select-index 9) || exit 0
 
-[[ $choice == "Open btop" ]] && exec ptyxis --new-window -- btop
+[[ $choice == "Open btop" ]] && exec ghostty +new-window -e btop
 exit 0

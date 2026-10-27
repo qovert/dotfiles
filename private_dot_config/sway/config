@@ -4,7 +4,8 @@
 include /etc/sway/config.d/*
 
 set $mod Mod4
-set $term ptyxis --new-window
+# Windows come from ghostty's single instance (D-Bus activated), so they open fast
+set $term ghostty +new-window
 set $menu fuzzel
 set $lock ~/.local/bin/lock-screen
 
@@ -90,6 +91,7 @@ assign [class="steam_app_.*"] workspace number 10
 
 # --- Keys: launch / session --------------------------------------------------
 bindsym $mod+Return exec $term
+bindsym $mod+Shift+Return exec ~/.local/bin/toolbox-term
 bindsym $mod+d exec $menu
 bindsym $mod+space exec $menu
 bindsym $mod+e exec nautilus
