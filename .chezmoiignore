@@ -4,6 +4,7 @@
 {{ if ne .chezmoi.os "linux" }}
 .config/sway
 .config/waybar
+.config/fuzzel
 .config/sunshine
 .config/wayvnc
 .config/systemd/user/sway-session.target.d
