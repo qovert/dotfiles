@@ -1,56 +1,114 @@
 {
   "layer": "top",
   "position": "top",
-  "height": 28,
-  "spacing": 8,
-  "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad"],
-  "modules-center": ["sway/window"],
+  "height": 34,
+  "spacing": 6,
+  "modules-left": [
+    "sway/workspaces",
+    "sway/mode",
+    "sway/scratchpad"
+  ],
+  "modules-center": [
+    "clock"
+  ],
   "modules-right": [
     "idle_inhibitor",
     "custom/tailscale",
-    "cpu",
-    "memory",
-    "temperature",
-    "custom/gpu",
+    "custom/sysstats",
     "pulseaudio",
-    "clock",
-    "tray"
+    "pulseaudio#microphone",
+    "bluetooth",
+    "tray",
+    "custom/power"
   ],
-  "sway/window": { "max-length": 80 },
-  "sway/scratchpad": { "format": "SP {count}", "show-empty": false },
+  "sway/scratchpad": {
+    "format": "󰈉  {count}",
+    "show-empty": false,
+    "tooltip-format": "{app}: {title}"
+  },
+  "clock": {
+    "format": "{:%H:%M  |  %a %d %b}",
+    "tooltip-format": "<tt>{calendar}</tt>",
+    "calendar": {
+      "mode": "month",
+      "weeks-pos": "left",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#f9e2af'><b>{}</b></span>",
+        "weekdays": "<span color='#a6adc8'><b>{}</b></span>",
+        "weeks": "<span color='#94e2d5'><b>W{}</b></span>",
+        "today": "<span color='#1e1e2e' background='#89b4fa'><b>{}</b></span>"
+      }
+    },
+    "actions": {
+      "on-click-right": "mode",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
+    }
+  },
   "idle_inhibitor": {
     "format": "{icon}",
-    "format-icons": { "activated": "☕", "deactivated": "💤" },
+    "format-icons": {
+      "activated": "󰅶",
+      "deactivated": "󰾪"
+    },
     "tooltip-format-activated": "Caffeine on: no idle lock",
     "tooltip-format-deactivated": "Caffeine off"
   },
   "custom/tailscale": {
     "exec": "~/.config/waybar/scripts/tailscale.sh",
     "return-type": "json",
-    "interval": 15
-  },
-  "cpu": { "format": "CPU {usage}%", "interval": 3 },
-  "memory": { "format": "RAM {used:0.0f}G", "interval": 5 },
-  "temperature": {
-    "hwmon-path-abs": "/sys/devices/pci0000:00/0000:00:18.3/hwmon",
-    "input-filename": "temp1_input",
-    "critical-threshold": 85,
-    "format": "{temperatureC}°C",
-    "tooltip-format": "CPU Tctl {temperatureC}°C"
-  },
-  "custom/gpu": {
-    "exec": "~/.config/waybar/scripts/gpu.sh",
-    "return-type": "json",
-    "interval": 3
+    "interval": 15,
+    "on-click": "ptyxis --new-window -- sh -c 'tailscale status; read -r _'"
   },
   "pulseaudio": {
-    "format": "VOL {volume}%",
-    "format-muted": "VOL muted",
-    "on-click": "pavucontrol"
+    "format": "{icon}  {volume}%",
+    "format-muted": "󰝟  muted",
+    "format-icons": {
+      "default": [
+        "󰕿",
+        "󰖀",
+        "󰕾"
+      ]
+    },
+    "scroll-step": 5,
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-click-right": "~/.config/waybar/scripts/audio-pick sink",
+    "on-click-middle": "pavucontrol",
+    "tooltip-format": "{desc}\nClick: mute · Right: output · Middle: mixer"
   },
-  "clock": {
-    "format": "{:%a %d %b  %H:%M}",
-    "tooltip-format": "<tt>{calendar}</tt>"
+  "pulseaudio#microphone": {
+    "format": "{format_source}",
+    "format-source": "󰍬  {volume}%",
+    "format-source-muted": "󰍭  muted",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+    "on-click-right": "~/.config/waybar/scripts/audio-pick source",
+    "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SOURCE@ 5%+",
+    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-",
+    "tooltip-format": "{source_desc}\nClick: mute · Right: input"
   },
-  "tray": { "spacing": 8 }
+  "bluetooth": {
+    "format": "󰂯",
+    "format-disabled": "󰂲",
+    "format-off": "󰂲",
+    "format-connected": "󰂱  {num_connections}",
+    "on-click": "blueman-manager",
+    "tooltip-format": "{controller_alias}: {status}",
+    "tooltip-format-connected": "{controller_alias}\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}"
+  },
+  "tray": {
+    "icon-size": 16,
+    "spacing": 8
+  },
+  "custom/power": {
+    "format": "",
+    "tooltip-format": "Power menu",
+    "on-click": "~/.local/bin/power-menu"
+  },
+  "custom/sysstats": {
+    "exec": "~/.config/waybar/scripts/sysstats.sh",
+    "return-type": "json",
+    "on-click": "~/.config/waybar/scripts/sysstats-menu"
+  }
 }

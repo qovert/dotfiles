@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# Waybar right-click on volume / microphone: pick the default output or input
+# in fuzzel. Sunshine's virtual sinks and monitor sources are left out.
+#   audio-pick sink|source
+set -euo pipefail
+kind=${1:-sink}
+default=$(pactl "get-default-$kind")
+
+name=$(pactl -f json list "${kind}s" | jq -r --arg d "$default" '
+    .[] | select((.name | endswith(".monitor") or startswith("sink-sunshine")) | not)
+    | "\(if .name == $d then "● " else "   " end)\(.description)\t\(.name)"' |
+    fuzzel --dmenu --prompt "$kind › " --with-nth 1 --accept-nth 2 --minimal-lines --width 50) || exit 0
+
+[[ -n $name ]] && pactl "set-default-$kind" "$name"

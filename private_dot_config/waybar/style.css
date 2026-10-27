@@ -1,5 +1,5 @@
 * {
-  font-family: "Cantarell", sans-serif;
+  font-family: "JetBrainsMono Nerd Font", "Cantarell", sans-serif;
   font-size: 13px;
   min-height: 0;
 }
@@ -9,10 +9,22 @@ window#waybar {
   color: #cdd6f4;
 }
 
+/* Every module is a rounded pill */
+#workspaces, #mode, #scratchpad, #clock, #idle_inhibitor, #custom-tailscale,
+#custom-sysstats, #pulseaudio, #bluetooth, #tray, #custom-power {
+  background: #313244;
+  border-radius: 8px;
+  padding: 0 10px;
+  margin: 4px 0;
+}
+
+#workspaces { padding: 0 4px; margin-left: 6px; }
+
 #workspaces button {
-  padding: 0 8px;
+  padding: 0 7px;
+  margin: 3px 1px;
   color: #a6adc8;
-  border-radius: 0;
+  border-radius: 6px;
 }
 
 #workspaces button.focused {
@@ -28,18 +40,27 @@ window#waybar {
 #mode {
   background: #f9e2af;
   color: #1e1e2e;
-  padding: 0 8px;
 }
 
-#temperature.critical,
-#custom-gpu.hot {
-  color: #f38ba8;
-}
+#clock { font-weight: bold; }
 
+#pulseaudio.muted,
+#pulseaudio.source-muted,
+#bluetooth.off,
+#bluetooth.disabled,
 #custom-tailscale.off {
   color: #6c7086;
 }
 
+#custom-sysstats.busy {
+  color: #f9e2af;
+}
+
 #idle_inhibitor.activated {
   color: #f9e2af;
+}
+
+#custom-power {
+  color: #f38ba8;
+  margin-right: 6px;
 }

@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+# Drop-down for the CPU/RAM tile: system stats in a fuzzel list under the
+# bar's top-right corner. Enter on "Open btop" (preselected) opens btop;
+# Esc closes.
+set -uo pipefail
+
+gib() { awk -v k="$1" 'BEGIN {printf "%.1f", k / 1048576}'; }
+
+# CPU usage over a short sample
+read -r _ u n s i w q sq st _ < /proc/stat
+t1=$((u + n + s + i + w + q + sq + st)) i1=$((i + w))
+sleep 0.4
+read -r _ u n s i w q sq st _ < /proc/stat
+t2=$((u + n + s + i + w + q + sq + st)) i2=$((i + w))
+cpu=$(( t2 > t1 ? 100 * ((t2 - t1) - (i2 - i1)) / (t2 - t1) : 0 ))
+threads=$(nproc)
+mhz=$(awk -F: '/^cpu MHz/ {s += $2; c++} END {if (c) printf "%.1f", s / c / 1000}' /proc/cpuinfo)
+read -r l1 l5 l15 _ < /proc/loadavg
+
+# CPU temp: k10temp Tctl
+cputemp="?"
+for h in /sys/class/hwmon/hwmon*; do
+    [[ $(<"$h/name") == k10temp ]] && cputemp=$(( $(<"$h/temp1_input") / 1000 ))
+done
+
+# amdgpu: load, VRAM, junction temp
+gpu="n/a"
+dev=$(dirname "$(ls /sys/class/drm/card*/device/gpu_busy_percent 2>/dev/null | head -1)")
+if [[ -d $dev ]]; then
+    busy=$(<"$dev/gpu_busy_percent")
+    vu=$(( $(<"$dev/mem_info_vram_used") / 1024 )) vt=$(( $(<"$dev/mem_info_vram_total") / 1024 ))
+    gtemp="?"
+    for label in "$dev"/hwmon/hwmon*/temp*_label; do
+        [[ $(<"$label") == junction ]] && gtemp=$(( $(<"${label%_label}_input") / 1000 ))
+    done
+    gpu="${busy}%  ·  VRAM $(gib "$vu") / $(gib "$vt") GiB  ·  ${gtemp}°C"
+fi
+
+eval "$(awk '/^MemTotal/ {print "mt=" $2} /^MemAvailable/ {print "ma=" $2}
+             /^SwapTotal/ {print "st=" $2} /^SwapFree/ {print "sf=" $2}' /proc/meminfo)"
+arc_kb=0
+[[ -r /proc/spl/kstat/zfs/arcstats ]] &&
+    arc_kb=$(awk '$1 == "size" {print int($3 / 1024)}' /proc/spl/kstat/zfs/arcstats)
+# ZFS ARC is reported apart: the kernel counts it as used, but it's a cache
+mu=$((mt - ma - arc_kb)) su=$((st - sf))
+disk=$(df -h --output=used,size,pcent / | awk 'NR == 2 {print $1 " / " $2 "  (" $3 ")"}')
+up=$(uptime -p | sed 's/^up //')
+
+choice=$(printf '%s\n' \
+    "CPU    ${cpu}%  ·  ${threads} threads  ·  ${mhz} GHz avg" \
+    "Load   ${l1}  ${l5}  ${l15}" \
+    "Temp   CPU ${cputemp}°C" \
+    "GPU    ${gpu}" \
+    "RAM    $(gib "$mu") / $(gib "$mt") GiB  ($(( 100 * mu / mt ))%)" \
+    "ARC    $(gib "$arc_kb") GiB  (ZFS cache, freed on demand)" \
+    "Swap   $(gib "$su") / $(gib "$st") GiB" \
+    "Disk   ${disk}" \
+    "Up     ${up}" \
+    "Open btop" |
+    fuzzel --dmenu --prompt 'stats › ' --lines 10 --width 58 --anchor top-right \
+        --x-margin 6 --y-margin 4 --select-index 9) || exit 0
+
+[[ $choice == "Open btop" ]] && exec ptyxis --new-window -- btop
+exit 0

@@ -5,7 +5,7 @@ state=$(jq -r '.BackendState // "Stopped"' <<<"$status")
 if [[ $state == Running ]]; then
     ip=$(jq -r '.Self.TailscaleIPs[0] // ""' <<<"$status")
     peers=$(jq '[.Peer // {} | .[] | select(.Online)] | length' <<<"$status")
-    printf '{"text":"TS","tooltip":"Tailscale up: %s\\n%s peers online","class":"on"}\n' "$ip" "$peers"
+    printf '{"text":"󰖂","tooltip":"Tailscale up: %s\\n%s peers online","class":"on"}\n' "$ip" "$peers"
 else
-    printf '{"text":"TS","tooltip":"Tailscale: %s","class":"off"}\n' "$state"
+    printf '{"text":"󰖂","tooltip":"Tailscale: %s","class":"off"}\n' "$state"
 fi
