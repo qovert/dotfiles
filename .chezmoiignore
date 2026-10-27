@@ -16,4 +16,5 @@
 .local/bin/wallpaper-rotate
 .local/bin/layout-main
 .local/bin/power-menu
+.local/bin/lock-screen
 {{ end }}

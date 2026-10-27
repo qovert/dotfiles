@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Lock with the wallpaper currently on screen (as written by wallpaper-rotate),
+# falling back to a solid colour. Used by Super+L, swayidle and power-menu.
+current="${XDG_RUNTIME_DIR:-/tmp}/sway-wallpaper.conf"
+img=$(sed -n 's/^output \* bg "\(.*\)" fill$/\1/p' "$current" 2>/dev/null)
+
+if [[ -n $img && -r $img ]]; then
+    exec swaylock -f -i "$img" -s fill -c 1e1e2e
+fi
+exec swaylock -f -c 1e1e2e

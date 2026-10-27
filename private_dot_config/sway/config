@@ -6,7 +6,7 @@ include /etc/sway/config.d/*
 set $mod Mod4
 set $term ptyxis --new-window
 set $menu fuzzel
-set $lock swaylock -f -c 1e1e2e
+set $lock ~/.local/bin/lock-screen
 
 # --- Outputs -----------------------------------------------------------------
 # Per-machine monitors and workspace placement. The real file is git-ignored;

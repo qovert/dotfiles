@@ -7,7 +7,7 @@ choice=$(printf '%s\n' Lock 'Log out' Suspend Restart 'Shut down' |
     fuzzel --dmenu --prompt 'power › ' --lines 5 --width 20) || exit 0
 
 case $choice in
-    Lock) swaylock -f -c 1e1e2e ;;
+    Lock) ~/.local/bin/lock-screen ;;
     'Log out') swaymsg exit ;;
     Suspend) systemctl suspend ;;
     Restart) systemctl reboot ;;
