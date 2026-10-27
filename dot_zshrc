@@ -77,6 +77,22 @@ compinit
 
 plugins=(git vscode 1password docker)
 
+# Inside a toolbox: name it in the prompt (TOOLBOX_NAME, used by the
+# oh-my-posh theme) and tint the terminal background per distro, so it's hard
+# to type into the wrong place. The tint is re-sent at each prompt (survives
+# `reset`) and cleared when the shell exits.
+if [[ -f /run/.toolboxenv ]]; then
+    export TOOLBOX_NAME=$(sed -n 's/^name="\(.*\)"$/\1/p' /run/.containerenv)
+    case $(. /etc/os-release && echo "$ID") in
+        arch) _toolbox_bg='#0b2233' ;;
+        *)    _toolbox_bg='#2a1533' ;;
+    esac
+    _toolbox_tint() { printf '\e]11;%s\a' "$_toolbox_bg"; }
+    _toolbox_untint() { printf '\e]111\a'; }
+    precmd_functions+=(_toolbox_tint)
+    zshexit_functions+=(_toolbox_untint)
+fi
+
 case `uname` in
   Darwin)
     eval "$(oh-my-posh init zsh --config $(brew --prefix oh-my-posh)/themes/kali.omp.json)"
@@ -119,10 +135,9 @@ getrez() {
 	find $1 -type f -name "*.jpg" -exec identify -format "%f %[fx:w]x%[fx:h]\n" {} \;
 }
 
-# Workaround for ghostty not seeming to know how to be xterm compatable
-if [[ "$TERM_PROGRAM" == "ghostty" ]]; then
-    export TERM=xterm-256color
-fi
+# TERM stays xterm-ghostty: toolboxes find its terminfo in ~/.terminfo
+# (compiled by the playbook) and ghostty's ssh-env sends xterm-256color to
+# remote hosts.
 
 pdf2cbz() {
   $HOME/bin/pdf_to_cbz.sh "$@"
