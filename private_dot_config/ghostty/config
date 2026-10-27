@@ -1,0 +1,28 @@
+# --- Theme ---
+# If "catppuccin-mocha" isn't found, it means the COPR package 
+# didn't include the optional theme pack. Let's use a standard one:
+theme = Dark Modern
+
+# --- Visuals ---
+background-opacity = 0.85
+# On Linux, window-blur is often handled by the desktop environment.
+# We will leave the unknown "blur" keys out for now.
+window-decoration = true
+
+# --- Native Splits & Tabs ---
+keybind = ctrl+shift+e=new_split:right
+keybind = ctrl+shift+o=new_split:down
+keybind = ctrl+shift+t=new_tab
+keybind = ctrl+shift+w=close_surface
+
+# --- Font ---
+font-family = "Monospace"
+font-size = 11
+
+# --- Security ---
+# This is the correct field for clipboard security in recent builds
+clipboard-read = ask
+
+# SSH: send TERM=xterm-256color to remote hosts instead of xterm-ghostty,
+# so nothing has to be installed on them. Locally TERM stays xterm-ghostty.
+shell-integration-features = ssh-env
