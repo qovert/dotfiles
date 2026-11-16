@@ -10,9 +10,12 @@ set -euo pipefail
 w=${1:-${SUNSHINE_CLIENT_WIDTH:-1920}}
 h=${2:-${SUNSHINE_CLIENT_HEIGHT:-1080}}
 fps=${3:-${SUNSHINE_CLIENT_FPS:-60}}
-state="${XDG_RUNTIME_DIR:-/tmp}/remote-outputs"
+# Both files are keyed to this sway process (see the include in the sway
+# config), so a session that dies mid-stream doesn't strand the next login.
+sock=${SWAYSOCK:?remote-on: not in a sway session}
+state="$sock.remote-outputs"
 # Included last by the sway config, so a reload keeps the remote layout
-overlay="${XDG_RUNTIME_DIR:-/tmp}/sway-remote.conf"
+overlay="$sock.remote.conf"
 
 [[ -f ~/.config/sway/remote.env ]] && . ~/.config/sway/remote.env
 

@@ -15,8 +15,11 @@ set $lock ~/.local/bin/lock-screen
 include ~/.config/sway/config.d/*
 # Current slideshow image, written by wallpaper-rotate
 include $XDG_RUNTIME_DIR/sway-wallpaper.conf
-# Written by remote-on during a Moonlight session, removed by remote-off
-include $XDG_RUNTIME_DIR/sway-remote.conf
+# Written by remote-on during a Moonlight session, removed by remote-off.
+# Keyed to this sway's IPC socket (unique per process, set before the config
+# loads), so an overlay left by a session that died mid-stream can't disable
+# the monitors at the next login.
+include $SWAYSOCK.remote.conf
 
 # Tearing for fullscreen games that ask for it (lower input latency)
 output * allow_tearing yes

@@ -4,10 +4,11 @@
 # in case a session ends without Sunshine running this.
 set -euo pipefail
 
-state="${XDG_RUNTIME_DIR:-/tmp}/remote-outputs"
+sock=${SWAYSOCK:?remote-off: not in a sway session}
+state="$sock.remote-outputs"
 
 # Remove the reload overlay first so a reload from here on restores the monitors
-rm -f "${XDG_RUNTIME_DIR:-/tmp}/sway-remote.conf"
+rm -f "$sock.remote.conf"
 
 # A monitor in deep standby can take a few seconds to wake, and enabling it
 # meanwhile fails. Retry, and never stop early: an aborted run would leave
