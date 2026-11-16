@@ -198,6 +198,7 @@ fi
 alias pwgen="tr -dc A-Za-z-0-9 </dev/urandom |head -c 15 ; echo ''"
 alias dy="dig +short @dns.toys"
 alias python="python3"
+alias sshpw='ssh -o PubkeyAuthentication=no -o PreferredAuthentications=password,keyboard-interactive'
 
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
